@@ -1,13 +1,12 @@
 module Erp::Taxes
   class Tax < ApplicationRecord
-		validates :name, :amount, :presence => true
+		validates :name, :amount, :scope, :computation, :presence => true
 		
     belongs_to :creator, class_name: "Erp::User"
     
     # get tax scope
     def self.get_tax_scope_options()
       [
-				{text: '',value: false},
         {text: I18n.t('sales'),value: 'sales'},
         {text: I18n.t('purchases'),value: 'purchases'},
         {text: I18n.t('none'),value: 'none'}
@@ -17,7 +16,6 @@ module Erp::Taxes
     # get tax computation
     def self.get_tax_computation_options()
       [
-				{text: '',value: false},
         {text: I18n.t('fixed'),value: 'fixed'},
         {text: I18n.t('percentage_of_price'),value: 'percentage_of_price'}
       ]

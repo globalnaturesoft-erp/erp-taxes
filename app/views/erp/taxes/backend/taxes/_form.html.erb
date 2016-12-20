@@ -10,7 +10,17 @@
         label: t('.tax_scope'),
         name: 'tax[scope]',
         value: tax.scope,
-        options: Erp::Taxes::Tax.get_tax_scope_options()
+        options: Erp::Taxes::Tax.get_tax_scope_options(),
+        required: true,
+        errors: tax.errors.full_messages_for(:scope)
+    }) %>
+    <%= erp_form_control('select', {
+        label: t('.computation'),
+        name: 'tax[computation]',
+        value: tax.computation,
+        options: Erp::Taxes::Tax.get_tax_computation_options(),
+        required: true,
+        errors: tax.errors.full_messages_for(:computation)
     }) %>
     <%= erp_form_control("text", {
         name: 'tax[amount]',
@@ -18,12 +28,6 @@
         label: t('.amount'),
         required: true,
         errors: tax.errors.full_messages_for(:amount)
-    }) %>
-    <%= erp_form_control('select', {
-        label: t('.computation'),
-        name: 'tax[computation]',
-        value: tax.computation,
-        options: Erp::Taxes::Tax.get_tax_computation_options()
     }) %>
     <%= erp_form_control("text", {
         name: 'tax[short_name]',
