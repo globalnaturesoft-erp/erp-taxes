@@ -4,13 +4,19 @@ vi:
   none: "Không"
   fixed: "Cố định giá tiền"
   percentage_of_price: "Phần trăm theo tiền"
+  layouts:
+    erp:
+      backend:
+        sidebar:
+          invoicing: "Biên nhận"
+          taxes: "Tất cả thuế"
   erp:
     taxes:
       backend:
         taxes:
           index:
             create: "Thêm mới"
-            taxes: "Thuế"
+            taxes: "Tất cả thuế"
             name: "Tên"
             archive: "Ẩn khỏi danh sách"
             unarchive: "Hiện ra danh sách"
@@ -34,7 +40,7 @@ vi:
             taxes: "Tất cả thuế"
             create: "Thêm mới"
           edit:
-            contacts: "Tất cả thuế"
+            taxes: "Tất cả thuế"
             edit: "Cập nhật thông tin"
           form:
             name: "Tên"
