@@ -1,0 +1,59 @@
+vi:
+  sales: "Bán hàng"
+  purchases: "Mua hàng"
+  none: "Không"
+  fixed: "Cố định giá tiền"
+  percentage_of_price: "Phần trăm theo tiền"
+  erp:
+    taxes:
+      backend:
+        taxes:
+          index:
+            create: "Thêm mới"
+            taxes: "Thuế"
+            name: "Tên"
+            archive: "Ẩn khỏi danh sách"
+            unarchive: "Hiện ra danh sách"
+            delete: "Xóa"
+            delete_confirm: "Bạn có chắc muốn xóa?"
+            name: "Tên"
+            status: "Trạng thái"
+            creator: "Người tạo"
+            created_at: "Ngày tạo"
+          list:
+            name: "Tên"
+            status: "Trạng thái"
+            creator: "Người tạo"
+            created_at: "Ngày tạo"
+            actions: "Thao tác"
+            archived: "Đã ẩn"
+            active: "Đang hiển thị"
+            edit: "Cập nhật thông tin"
+            no_matching_records_found: "Danh sách hiện tại đang trống."
+          new:
+            taxes: "Tất cả thuế"
+            create: "Thêm mới"
+          edit:
+            contacts: "Tất cả thuế"
+            edit: "Cập nhật thông tin"
+          form:
+            name: "Tên"
+            amount: "Giá trị"
+            scope: "Phạm vi"
+            computation: "Ước tính"
+            short_name: "Tên rút gọn"
+            submit: "Lưu"
+            cancel: "Hủy"
+  activerecord:
+    errors:
+      models:
+        erp/taxes/tax:
+          attributes:
+            name:
+              blank: "không được trống."
+            amount:
+              blank: "không được trống."
+    attributes:
+      erp/taxes/tax:
+        name: "Tên"
+        amount: "Giá trị"

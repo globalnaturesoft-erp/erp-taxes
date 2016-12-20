@@ -1,0 +1,19 @@
+<li class="nav-item <%= "active open" if ["erp/taxes/backend/taxes"].include?(params[:controller]) %>">
+    <a href="javascript:;" class="nav-link nav-toggle">
+        <i class="fa fa-file-text-o"></i>
+        <span class="title"><%= t('.invoicing') %></span>
+        <% if ["erp/taxes/backend/taxes"].include?(params[:controller]) %>
+            <span class="selected"></span>
+            <span class="arrow open"></span>
+        <% else %>
+            <span class="arrow"></span>
+        <% end %>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item">
+            <a href="<%= erp_taxes.backend_taxes_path %>" class="nav-link">
+                <span class="title"><%= t('.taxes') %></span>
+            </a>
+        </li>
+    </ul>
+</li>
