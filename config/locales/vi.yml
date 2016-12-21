@@ -3,7 +3,7 @@ vi:
   purchases: "Mua hàng"
   none: "Không"
   fixed: "Cố định giá tiền"
-  percentage_of_price: "Phần trăm theo tiền"
+  percentage_of_price: "Tỉ lệ phần trăm"
   layouts:
     erp:
       backend:
@@ -14,38 +14,50 @@ vi:
     taxes:
       backend:
         taxes:
+          create:
+            success: "Thêm thông tin thuế thành công."
+          update:
+            success: "Cập nhật thông tin thuế thành công."
+          destroy:
+            success: "Xóa thông tin thuế thành công."
+          delete_all:
+            success: "Xóa thông tin thuế thành công."
+          archive_all:
+            success: "Ẩn thông tin thuế thành công."
+          unarchive_all:
+            success: "Hiện thông tin thuế thành công."
           index:
-            create: "Thêm mới"
+            create: "Thêm thông tin thuế"
             taxes: "Tất cả thuế"
-            name: "Tên"
+            name: "Tên thuế"
             archive: "Ẩn khỏi danh sách"
             unarchive: "Hiện ra danh sách"
-            delete: "Xóa"
+            delete: "Xóa thông tin thuế"
             delete_confirm: "Bạn có chắc muốn xóa?"
-            name: "Tên"
+            name: "Tên thuế"
             status: "Trạng thái"
             creator: "Người tạo"
             created_at: "Ngày tạo"
           list:
-            name: "Tên"
+            name: "Tên thuế"
             status: "Trạng thái"
             creator: "Người tạo"
             created_at: "Ngày tạo"
             actions: "Thao tác"
             archived: "Đã ẩn"
             active: "Đang hiển thị"
-            edit: "Cập nhật thông tin"
-            no_matching_records_found: "Danh sách hiện tại đang trống."
+            edit: "Cập nhật"
+            no_matching_records_found: "Danh sách thuế hiện tại đang trống."
           new:
             taxes: "Tất cả thuế"
-            create: "Thêm mới"
+            create: "Thêm thông tin thuế"
           edit:
             taxes: "Tất cả thuế"
-            edit: "Cập nhật thông tin"
+            edit: "Cập nhật thuế"
           form:
-            name: "Tên"
+            name: "Tên thuế"
             amount: "Giá trị"
-            scope: "Phạm vi"
+            tax_scope: "Phạm vi"
             computation: "Ước tính"
             short_name: "Tên rút gọn"
             submit: "Lưu"
@@ -61,5 +73,5 @@ vi:
               blank: "không được trống."
     attributes:
       erp/taxes/tax:
-        name: "Tên"
+        name: "Tên thuế"
         amount: "Giá trị"

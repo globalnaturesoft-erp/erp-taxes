@@ -44,7 +44,7 @@ module Erp
                 value: @tax.id
               }
             else
-              redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: 'Tax was successfully created.'
+              redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: t('.success')
             end
           else
             if params.to_unsafe_hash['format'] == 'json'
@@ -58,7 +58,7 @@ module Erp
         # PATCH/PUT /taxes/1
         def update
           if @tax.update(tax_params)
-            redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: 'Tax was successfully updated.'
+            redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: t('.success')
           else
             render :edit
           end
@@ -68,10 +68,10 @@ module Erp
         def destroy
           @tax.destroy
           respond_to do |format|
-            format.html { redirect_to erp_taxes.backend_taxes_path, notice: 'Tax was successfully destroyed.' }
+            format.html { redirect_to erp_taxes.backend_taxes_path, notice: t('.success') }
             format.json {
               render json: {
-                'message': 'Tax was successfully destroyed.',
+                'message': t('.success'),
                 'type': 'success'
               }
             }
@@ -85,7 +85,7 @@ module Erp
           respond_to do |format|
             format.json {
               render json: {
-                'message': 'Taxes were successfully destroyed.',
+                'message': t('.success'),
                 'type': 'success'
               }
             }
@@ -99,7 +99,7 @@ module Erp
           respond_to do |format|
             format.json {
               render json: {
-                'message': 'Taxes were successfully archived.',
+                'message': t('.success'),
                 'type': 'success'
               }
             }
@@ -113,7 +113,7 @@ module Erp
           respond_to do |format|
             format.json {
               render json: {
-                'message': 'Taxes were successfully active.',
+                'message': t('.success'),
                 'type': 'success'
               }
             }
