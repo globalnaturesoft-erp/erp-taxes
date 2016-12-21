@@ -123,7 +123,7 @@ module Erp
         def dataselect
           respond_to do |format|
             format.json {
-              render json: Tax.dataselect(params[:keyword])
+              render json: Tax.dataselect(params)
             }
           end
         end

@@ -50,11 +50,15 @@ module Erp::Taxes
     end
     
     # data for dataselect ajax
-    def self.dataselect(keyword='')
+    def self.dataselect(params)
       query = self.all
       
-      if keyword.present?
-        keyword = keyword.strip.downcase
+      if params[:scope].present?
+        query = self.where(scope: params[:scope])
+      end
+      
+      if params[:keyword].present?
+        keyword = params[:keyword].strip.downcase
         query = query.where('LOWER(name) LIKE ?', "%#{keyword}%")
       end
       
