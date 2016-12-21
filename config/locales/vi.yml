@@ -21,11 +21,11 @@ vi:
           destroy:
             success: "Xóa thông tin thuế thành công."
           delete_all:
-            success: "Xóa thông tin thuế thành công."
+            success: "Xóa thông tin thuế được chọn thành công."
           archive_all:
-            success: "Ẩn thông tin thuế thành công."
+            success: "Ẩn thông tin thuế được chọn thành công."
           unarchive_all:
-            success: "Hiện thông tin thuế thành công."
+            success: "Hiện thông tin thuế được chọn thành công."
           index:
             create: "Thêm thông tin thuế"
             taxes: "Tất cả thuế"
