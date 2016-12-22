@@ -42,8 +42,16 @@ module Erp::Taxes
     end
     
     def self.search(params)
-      query = self.order("created_at DESC")
+      query = self.all
       query = self.filter(query, params)
+      
+      # order
+      if params[:sort_by].present?
+        order = params[:sort_by]
+        order += " #{params[:sort_direction]}" if params[:sort_direction].present?
+        
+        query = query.order(order)
+      end
       
       return query
     end

@@ -6,7 +6,7 @@
                     <%= erp_datalist_check_all %>
                 </th>
                 <% if get_columns(params).include?("name") %>
-                    <th>
+                    <th class="sortable" sort-by='erp_taxes_taxes.name'>
                         <%= t('.name') %>
                     </th>
                 <% end %>
@@ -21,7 +21,7 @@
                     </th>
                 <% end %>
                 <% if get_columns(params).include?("created_at") %>
-                    <th>
+                    <th class="sortable" sort-by='erp_taxes_taxes.created_at'>
                         <%= t('.created_at') %>
                     </th>
                 <% end %>
