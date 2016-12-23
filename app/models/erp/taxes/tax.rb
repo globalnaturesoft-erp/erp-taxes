@@ -22,8 +22,8 @@ module Erp::Taxes
     # get tax computation
     def self.get_tax_computation_options()
       [
-        {text: I18n.t('fixed'), value: 'fixed'},
-        {text: I18n.t('percentage_of_price'), value: 'percentage_of_price'}
+        {text: I18n.t('percentage_of_price'), value: 'percentage_of_price'},
+        {text: I18n.t('fixed'), value: 'fixed'}
       ]
     end
     

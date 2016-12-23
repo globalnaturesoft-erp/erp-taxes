@@ -22,20 +22,20 @@
                 <% end %>
                 <% if get_columns(params).include?("status") %>
                     <th>
-                        <%= t('.status') %>
+                        <%= t('status') %>
                     </th>
                 <% end %>
                 <% if get_columns(params).include?("creator") %>
                     <th>
-                        <%= t('.creator') %>
+                        <%= t('creator') %>
                     </th>
                 <% end %>
                 <% if get_columns(params).include?("updated_at") %>
                     <th class="sortable" sort-by='erp_taxes_taxes.updated_at'>
-                        <%= t('.updated_at') %>
+                        <%= t('updated_at') %>
                     </th>
                 <% end %>
-                <th width="7%"><%= t('.actions') %></th>
+                <th width="7%"><%= t('actions') %></th>
             </tr>
         </thead>
         <tbody>
@@ -56,9 +56,9 @@
                     <% if get_columns(params).include?("status") %>
                     <td>
                         <% if tax.archived == true %>
-                        <span class="label label-sm label-danger"><%= t('.archived') %></span>
+                        <span class="label label-sm label-danger"><%= t('archived') %></span>
                         <% else %>
-                        <span class="label label-sm label-success"><%= t('.active') %></span>
+                        <span class="label label-sm label-success"><%= t('active') %></span>
                         <% end %> 
                     </td>
                     <% end %>
@@ -72,17 +72,17 @@
                         <%= erp_datalist_row_actions(
                             [
                                 {
-                                    text: '<i class="fa fa-edit"></i> '+t('.edit'),
+                                    text: '<i class="fa fa-edit"></i> '+t('edit'),
                                     href: erp_taxes.edit_backend_tax_path(tax)
                                 },
                                 {
-                                    text: '<i class="fa fa-eye-slash"></i> '+t('.archive'),
+                                    text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
                                     url: erp_taxes.archive_backend_taxes_path(id: tax),
                                     data_method: 'PUT',
                                     class: 'ajax-link'
                                 },
                                 {
-                                    text: '<i class="fa fa-eye"></i> '+t('.unarchive'),
+                                    text: '<i class="fa fa-eye"></i> '+t('unarchive'),
                                     url: erp_taxes.unarchive_backend_taxes_path(id: tax),
                                     data_method: 'PUT',
                                     class: 'ajax-link'
@@ -95,7 +95,7 @@
                                     url: erp_taxes.backend_tax_path(tax),
                                     data_method: 'DELETE',
                                     class: 'ajax-link',
-                                    data_confirm: t('.delete_confirm')
+                                    data_confirm: t('delete_confirm')
                                 }
                             ]
                         ) %>

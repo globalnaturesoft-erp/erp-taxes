@@ -22,13 +22,29 @@
         required: true,
         errors: tax.errors.full_messages_for(:computation)
     }) %>
-    <%= erp_form_control("text", {
-        name: 'tax[amount]',
-        value: tax.amount,                   
-        label: t('.amount'),
-        required: true,
-        errors: tax.errors.full_messages_for(:amount)
-    }) %>
+    <div class="hiddable-control"
+        data-cond-item="select[name='tax[computation]']"
+        data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_FIXED %>">
+        <%= erp_form_control("text", {
+            name: 'tax[amount]',
+            value: tax.amount,               
+            label: t('.amount'),
+            required: true,
+            errors: tax.errors.full_messages_for(:amount)
+        }) %>
+    </div>
+    <div class="hiddable-control"
+        data-cond-item="select[name='tax[computation]']"
+        data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_PRICE %>">
+        <%= erp_form_control("text", {
+            name: 'tax[amount]',
+            id: 'touchspin_1',
+            value: tax.amount,               
+            label: t('.amount'),
+            required: true,
+            errors: tax.errors.full_messages_for(:amount)
+        }) %>
+    </div>
     <%= erp_form_control("text", {
         name: 'tax[short_name]',
         value: tax.short_name,                   
@@ -36,10 +52,10 @@
     }) %>
     <hr>
     <%= erp_component('button/save', {
-        text: t('.submit')
+        text: t('submit')
     }) %>
     <%= erp_component('button/cancel', {
-        text: t('.cancel'),
+        text: t('cancel'),
         href: erp_taxes.backend_taxes_path
     }) %>
 <% end %>

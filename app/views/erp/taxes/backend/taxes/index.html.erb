@@ -18,17 +18,17 @@
     url: erp_taxes.list_backend_taxes_path,
     keywords: [
         {
-            text: t('.search_name'), name: 'search_name'
+            text: t('.keyword'), name: 'search_name'
         }
     ],
     actions: [
         {
-            text: '<i class="fa fa-eye-slash"></i> '+t('.archive'),
+            text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
             url: erp_taxes.archive_all_backend_taxes_path,
             data_method: 'PUT'
         },
         {
-            text: '<i class="fa fa-eye"></i> '+t('.unarchive'),
+            text: '<i class="fa fa-eye"></i> '+t('unarchive'),
             url: erp_taxes.unarchive_all_backend_taxes_path,
             data_method: 'PUT'
         },
@@ -39,7 +39,7 @@
             text: '<i class="fa fa-trash"></i> '+t('.delete'),
             url: erp_taxes.delete_all_backend_taxes_path,
             data_method: 'DELETE',
-            data_confirm: t('.delete_confirm')
+            data_confirm: t('delete_confirm')
         }
     ],
     filters: [
@@ -65,7 +65,7 @@
             divider: true
         },
         {
-            text: t('.archived'), name: 'show_archived', value: true, checked: false
+            text: t('.tax_archived'), name: 'show_archived', value: true, checked: false
         },
     ],
     columns: [
@@ -79,13 +79,13 @@
             text: t('.short_name'), name: 'short_name', value: true, checked: true
         },
         {
-            text: t('.status'), name: 'status', value: true, checked: true
+            text: t('status'), name: 'status', value: true, checked: true
         },
         {
-            text: t('.creator'), name: 'creator', value: true, checked: false
+            text: t('creator'), name: 'creator', value: true, checked: false
         },
         {
-            text: t('.updated_at'), name: 'updated_at', value: true, checked: true
+            text: t('updated_at'), name: 'updated_at', value: true, checked: true
         }
     ],
     sort: { sort_by: 'erp_taxes_taxes.updated_at', sort_direction: 'desc' }

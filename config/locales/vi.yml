@@ -1,8 +1,8 @@
 vi:
   sales: "Bán hàng"
   purchases: "Mua hàng"
-  none: "Không"
-  fixed: "Cố định giá tiền"
+  others: "Khác"
+  fixed: "Giá tiền cố định"
   percentage_of_price: "Tỉ lệ phần trăm"
   layouts:
     erp:
@@ -20,6 +20,10 @@ vi:
             success: "Cập nhật thông tin thuế thành công."
           destroy:
             success: "Xóa thông tin thuế thành công."
+          archive:
+            success: "Ẩn thông tin thuế thành công."
+          unarchive:
+            success: "Hiện thông tin thuế thành công."
           delete_all:
             success: "Xóa thông tin thuế được chọn thành công."
           archive_all:
@@ -27,27 +31,24 @@ vi:
           unarchive_all:
             success: "Hiện thông tin thuế được chọn thành công."
           index:
-            create: "Thêm thông tin thuế"
             taxes: "Tất cả thuế"
+            create: "Thêm thông tin thuế"
+            sales: "Bán hàng"
+            purchases: "Mua hàng"
+            others: "Khác"
+            fixed: "Giá tiền cố định"
+            percentage_of_price: "Tỉ lệ phần trăm"
+            tax_archived: "Thuế đã bị ẩn"
             name: "Tên thuế"
+            amount: "Giá trị"
             short_name: "Tên rút gọn"
-            archive: "Ẩn khỏi danh sách"
-            unarchive: "Hiện ra danh sách"
             delete: "Xóa thông tin thuế"
-            delete_confirm: "Bạn có chắc muốn xóa?"
-            search_name: "Tìm theo từ khóa"
-            status: "Trạng thái"
-            creator: "Người tạo"
-            created_at: "Ngày tạo"
+            keyword: "từ khóa"
           list:
             name: "Tên thuế"
+            amount: "Giá trị"
+            short_name: "Tên rút gọn"
             status: "Trạng thái"
-            creator: "Người tạo"
-            created_at: "Ngày tạo"
-            actions: "Thao tác"
-            archived: "Đã ẩn"
-            active: "Đang hiển thị"
-            edit: "Cập nhật"
             delete: "Xóa thông tin thuế"
             delete_confirm: "Bạn có chắc muốn xóa?"
             no_matching_records_found: "Danh sách thuế hiện tại đang trống."
@@ -56,15 +57,13 @@ vi:
             create: "Thêm thông tin thuế"
           edit:
             taxes: "Tất cả thuế"
-            edit: "Cập nhật thuế"
+            create: "Thêm thông tin thuế"
           form:
             name: "Tên thuế"
             amount: "Giá trị"
             tax_scope: "Phạm vi"
             computation: "Ước tính"
             short_name: "Tên rút gọn"
-            submit: "Lưu"
-            cancel: "Hủy"
   activerecord:
     errors:
       models:
