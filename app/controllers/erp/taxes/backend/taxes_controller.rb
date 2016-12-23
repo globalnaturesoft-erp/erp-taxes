@@ -4,7 +4,7 @@ module Erp
   module Taxes
     module Backend
       class TaxesController < Erp::Backend::BackendController
-        before_action :set_tax, only: [:edit, :update, :destroy]
+        before_action :set_tax, only: [:archive, :unarchive, :edit, :update, :destroy]
         before_action :set_taxes, only: [:delete_all, :archive_all, :unarchive_all]
         
         # GET /taxes
@@ -37,7 +37,7 @@ module Erp
           @tax.creator = current_user
           
           if @tax.save
-            if params.to_unsafe_hash['format'] == 'json'
+            if request.xhr?
               render json: {
                 status: 'success',
                 text: @tax.name,
@@ -58,7 +58,15 @@ module Erp
         # PATCH/PUT /taxes/1
         def update
           if @tax.update(tax_params)
-            redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: t('.success')
+            if request.xhr?
+              render json: {
+                status: 'success',
+                text: @tax.name,
+                value: @tax.id
+              }
+            else
+              redirect_to erp_taxes.edit_backend_tax_path(@tax), notice: t('.success')
+            end
           else
             render :edit
           end
@@ -67,6 +75,7 @@ module Erp
         # DELETE /taxes/1
         def destroy
           @tax.destroy
+          
           respond_to do |format|
             format.html { redirect_to erp_taxes.backend_taxes_path, notice: t('.success') }
             format.json {
@@ -76,6 +85,34 @@ module Erp
               }
             }
           end
+        end
+        
+        # Archive /taxes/archive?id=1
+        def archive      
+          @tax.archive
+          
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end          
+        end
+        
+        # Unarchive /taxes/unarchive?id=1
+        def unarchive
+          @tax.unarchive
+          
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end          
         end
         
         # DELETE /taxes/delete_all?ids=1,2,3

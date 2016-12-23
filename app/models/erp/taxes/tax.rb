@@ -3,12 +3,19 @@ module Erp::Taxes
 		validates :name, :amount, :scope, :computation, :presence => true
     belongs_to :creator, class_name: "Erp::User"
     
+    # class const
+    TAX_SCOPE_SALES = 'sales'
+    TAX_SCOPE_PURCHASES = 'purchases'
+    TAX_SCOPE_OTHERS = 'others'
+    TAX_COMPUTATION_FIXED = 'fixed'
+    TAX_COMPUTATION_PRICE = 'percentage_of_price'
+    
     # get tax scope
     def self.get_tax_scope_options()
       [
         {text: I18n.t('sales'), value: 'sales'},
         {text: I18n.t('purchases'), value: 'purchases'},
-        {text: I18n.t('none'), value: 'none'}
+        {text: I18n.t('others'), value: 'others'}
       ]
     end
     
@@ -25,17 +32,44 @@ module Erp::Taxes
       params = params.to_unsafe_hash
       and_conds = []
       
+      # show archived items condition - default: false
+			show_archived = false
+			
+			#filters
+			if params["filters"].present?
+				params["filters"].each do |ft|
+					or_conds = []
+					ft[1].each do |cond|
+						# in case filter is show archived
+						if cond[1]["name"] == 'show_archived'
+							# show archived items
+							show_archived = true
+						else
+							or_conds << "#{cond[1]["name"]} = '#{cond[1]["value"]}'"
+						end
+					end
+					and_conds << '('+or_conds.join(' OR ')+')' if !or_conds.empty?
+				end
+			end
+      
       #keywords
       if params["keywords"].present?
         params["keywords"].each do |kw|
           or_conds = []
           kw[1].each do |cond|
-            or_conds << "LOWER(#{cond[1]["name"]}) LIKE '%#{cond[1]["value"].downcase.strip}%'"
+						if cond[1]["name"] == 'search_name'
+							or_conds << "(LOWER(erp_taxes_taxes.name) LIKE '%#{cond[1]["value"].downcase.strip}%') OR (LOWER(erp_taxes_taxes.short_name) LIKE '%#{cond[1]["value"].downcase.strip}%')"
+						else
+							or_conds << "LOWER(#{cond[1]["name"]}) LIKE '%#{cond[1]["value"].downcase.strip}%'"			
+            end
           end
           and_conds << '('+or_conds.join(' OR ')+')'
         end
       end
-
+			
+			# showing archived items if show_archived is not true
+			query = query.where(archived: false) if show_archived == false
+			
       query = query.where(and_conds.join(' AND ')) if !and_conds.empty?
       
       return query
@@ -71,6 +105,14 @@ module Erp::Taxes
       
       query = query.limit(8).map{|tax| {value: tax.id, text: tax.name} }
     end
+    
+    def archive
+			update_columns(archived: true)
+		end
+		
+		def unarchive
+			update_columns(archived: false)
+		end
     
     def self.archive_all
 			update_all(archived: true)

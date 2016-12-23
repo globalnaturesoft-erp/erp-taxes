@@ -10,6 +10,16 @@
                         <%= t('.name') %>
                     </th>
                 <% end %>
+                <% if get_columns(params).include?("amount") %>
+                    <th>
+                        <%= t('.amount') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("short_name") %>
+                    <th class="sortable" sort-by='erp_taxes_taxes.short_name'>
+                        <%= t('.short_name') %>
+                    </th>
+                <% end %>
                 <% if get_columns(params).include?("status") %>
                     <th>
                         <%= t('.status') %>
@@ -20,9 +30,9 @@
                         <%= t('.creator') %>
                     </th>
                 <% end %>
-                <% if get_columns(params).include?("created_at") %>
-                    <th class="sortable" sort-by='erp_taxes_taxes.created_at'>
-                        <%= t('.created_at') %>
+                <% if get_columns(params).include?("updated_at") %>
+                    <th class="sortable" sort-by='erp_taxes_taxes.updated_at'>
+                        <%= t('.updated_at') %>
                     </th>
                 <% end %>
                 <th width="7%"><%= t('.actions') %></th>
@@ -37,6 +47,12 @@
                     <% if get_columns(params).include?("name") %>
                         <td><%= link_to tax.name, erp_taxes.edit_backend_tax_path(tax) %></td>
                     <% end %>
+                    <% if get_columns(params).include?("amount") %>
+                        <td><%= tax.amount %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("short_name") %>
+                        <td><%= tax.short_name %></td>
+                    <% end %>
                     <% if get_columns(params).include?("status") %>
                     <td>
                         <% if tax.archived == true %>
@@ -49,8 +65,8 @@
                     <% if get_columns(params).include?("creator") %>
                         <td></td>
                     <% end %>
-                    <% if get_columns(params).include?("created_at") %>
-                        <td class="center"><%= tax.created_at.strftime("%d/%m/%Y") %></td>
+                    <% if get_columns(params).include?("updated_at") %>
+                        <td><%= tax.updated_at.strftime("%d/%m/%Y") %></td>
                     <% end %>
                     <td>
                         <%= erp_datalist_row_actions(
@@ -58,6 +74,28 @@
                                 {
                                     text: '<i class="fa fa-edit"></i> '+t('.edit'),
                                     href: erp_taxes.edit_backend_tax_path(tax)
+                                },
+                                {
+                                    text: '<i class="fa fa-eye-slash"></i> '+t('.archive'),
+                                    url: erp_taxes.archive_backend_taxes_path(id: tax),
+                                    data_method: 'PUT',
+                                    class: 'ajax-link'
+                                },
+                                {
+                                    text: '<i class="fa fa-eye"></i> '+t('.unarchive'),
+                                    url: erp_taxes.unarchive_backend_taxes_path(id: tax),
+                                    data_method: 'PUT',
+                                    class: 'ajax-link'
+                                },
+                                {
+                                    divider: true
+                                },
+                                {
+                                    text: '<i class="fa fa-trash"></i> '+t('.delete'),
+                                    url: erp_taxes.backend_tax_path(tax),
+                                    data_method: 'DELETE',
+                                    class: 'ajax-link',
+                                    data_confirm: t('.delete_confirm')
                                 }
                             ]
                         ) %>

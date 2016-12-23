@@ -1,18 +1,19 @@
 <% content_for :title do %>
-    <%= t('.edit') %>
+    <%= @tax.name %>
 <% end %>
 
 <% content_for :page_title do %>    
     <a href="<%= erp_taxes.backend_taxes_path %>">
     <i class="fa fa-file-text-o"></i> <%= t('.taxes') %>
-    </a> / <%= t('.edit') %>
+    </a> / <%= @tax.name %>
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <div class="btn-group">
-        <div class="clearfix">
-        </div>
-    </div>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_taxes.new_backend_tax_path,
+        class: 'btn-sm'
+    }) %>
 <% end %>
 
 <div class="row">
