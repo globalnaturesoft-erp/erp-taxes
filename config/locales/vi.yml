@@ -48,9 +48,7 @@ vi:
             name: "Tên thuế"
             amount: "Giá trị"
             short_name: "Tên rút gọn"
-            status: "Trạng thái"
             delete: "Xóa thông tin thuế"
-            delete_confirm: "Bạn có chắc muốn xóa?"
             no_matching_records_found: "Danh sách thuế hiện tại đang trống."
           new:
             taxes: "Tất cả thuế"
