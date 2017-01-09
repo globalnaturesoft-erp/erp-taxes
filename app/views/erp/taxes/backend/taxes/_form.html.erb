@@ -3,11 +3,13 @@
         name: 'tax[name]',
         value: tax.name,                   
         label: t('.name'),
+        help: t('.help_tax_name'),
         required: true,
         errors: tax.errors.full_messages_for(:name)
     }) %>
     <%= erp_form_control('select', {
         label: t('.tax_scope'),
+        help: t('.help_tax_scope'),
         name: 'tax[scope]',
         value: tax.scope,
         options: Erp::Taxes::Tax.get_tax_scope_options(),
@@ -16,6 +18,7 @@
     }) %>
     <%= erp_form_control('select', {
         label: t('.computation'),
+        help: t('.help_computation'),
         name: 'tax[computation]',
         value: tax.computation,
         options: Erp::Taxes::Tax.get_tax_computation_options(),
