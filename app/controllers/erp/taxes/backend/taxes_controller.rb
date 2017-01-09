@@ -22,6 +22,11 @@ module Erp
         def new
           @tax = Tax.new
           
+          # default scope
+          if params[:scope].present?
+            @tax.scope = params[:scope]
+          end
+          
           if request.xhr?
             render '_form', layout: nil, locals: {tax: @tax}
           end
@@ -29,6 +34,7 @@ module Erp
     
         # GET /taxes/1/edit
         def edit
+          
         end
     
         # POST /taxes
