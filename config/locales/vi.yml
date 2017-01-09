@@ -62,6 +62,11 @@ vi:
             tax_scope: "Phạm vi"
             computation: "Ước tính"
             short_name: "Tên rút gọn"
+            help_tax_name: "Tên thuế phải nộp hoặc thuế được khấu trừ"
+            help_tax_scope: "Phạm vi của thuế áp dụng cho đối tượng nào?"
+            help_computation: "Cách thức tính thuế theo giá trị"
+            submit: "Lưu"
+            cancel: "Hủy"
   activerecord:
     errors:
       models:
