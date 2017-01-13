@@ -9,7 +9,8 @@
 <% content_for :page_toolbar do %>
     <%= erp_component('button/create', {
         text: t('.create'),
-        href: erp_taxes.new_backend_tax_path
+        href: erp_taxes.new_backend_tax_path,
+        class: 'btn-noborder'
     }) %>
 <% end %>
 
