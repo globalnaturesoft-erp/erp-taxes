@@ -73,9 +73,9 @@ vi:
         erp/taxes/tax:
           attributes:
             name:
-              blank: "không được trống."
+              blank: "không được để trống."
             amount:
-              blank: "không được trống."
+              blank: "không được để trống."
     attributes:
       erp/taxes/tax:
         name: "Tên thuế"
