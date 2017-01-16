@@ -18,6 +18,14 @@
     keywords: [
         {
             text: t('.keyword'), name: 'search_name'
+        },
+        {
+            text: t('creator'),
+            name: 'erp_users.name',
+            select: {
+                name: 'erp_users.id',
+                data_url: erp.dataselect_backend_users_path
+            }
         }
     ],
     actions: [
