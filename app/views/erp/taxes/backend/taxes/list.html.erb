@@ -62,7 +62,11 @@
                 </td>
                 <% end %>
                 <% if get_columns(params).include?("creator") %>
-                    <td></td>
+                    <td>
+                        <%= erp_component('avatar', {
+                            user: tax.creator
+                        }) %>
+                    </td>
                 <% end %>
                 <% if get_columns(params).include?("updated_at") %>
                     <td><%= tax.updated_at.strftime("%d/%m/%Y") %></td>
