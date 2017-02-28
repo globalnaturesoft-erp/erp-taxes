@@ -21,15 +21,15 @@ vi:
           destroy:
             success: "Xóa thông tin thuế thành công."
           archive:
-            success: "Ẩn thông tin thuế thành công."
+            success: "Thông tin thuế không còn được sử dụng."
           unarchive:
-            success: "Hiện thông tin thuế thành công."
+            success: "Thông tin thuế đã được sử dụng trở lại."
           delete_all:
             success: "Xóa thông tin thuế được chọn thành công."
           archive_all:
-            success: "Ẩn thông tin thuế được chọn thành công."
+            success: "Thông tin thuế không còn được sử dụng."
           unarchive_all:
-            success: "Hiện thông tin thuế được chọn thành công."
+            success: "Thông tin thuế đã được sử dụng trở lại."
           index:
             taxes: "Tất cả thuế"
             create: "Thêm thông tin thuế"
@@ -38,18 +38,22 @@ vi:
             others: "Khác"
             fixed: "Giá tiền cố định"
             percentage_of_price: "Tỉ lệ phần trăm"
-            tax_archived: "Thuế đã bị ẩn"
+            tax_archived: "Thuế không còn sử dụng"
             name: "Tên thuế"
             amount: "Giá trị"
             short_name: "Tên rút gọn"
             delete: "Xóa thông tin thuế"
             keyword: "từ khóa"
+            archive_confirm: "Bạn chắc chắn muốn ngừng sử dụng thuế này?"
+            unarchive_confirm: "Bạn chắc chắn muốn sử dụng lại thuế này?"
           list:
             name: "Tên thuế"
             amount: "Giá trị"
             short_name: "Tên rút gọn"
             delete: "Xóa thông tin thuế"
             no_matching_records_found: "Danh sách thuế hiện tại đang trống."
+            archive_confirm: "Bạn chắc chắn muốn ngừng sử dụng thuế này?"
+            unarchive_confirm: "Bạn chắc chắn muốn sử dụng lại thuế này?"
           new:
             taxes: "Tất cả thuế"
             create: "Thêm thông tin thuế"

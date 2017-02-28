@@ -33,12 +33,14 @@
         {
             text: '<i class="fa fa-eye-slash"></i> '+t('archive'),
             url: erp_taxes.archive_all_backend_taxes_path,
-            data_method: 'PUT'
+            data_method: 'PUT',
+            data_confirm: t('.archive_confirm')
         },
         {
             text: '<i class="fa fa-eye"></i> '+t('unarchive'),
             url: erp_taxes.unarchive_all_backend_taxes_path,
-            data_method: 'PUT'
+            data_method: 'PUT',
+            data_confirm: t('.unarchive_confirm')
         },
         {
             divider: true
