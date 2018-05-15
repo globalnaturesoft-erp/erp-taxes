@@ -103,7 +103,9 @@ module Erp::Taxes
         query = query.where('LOWER(name) LIKE ?', "%#{keyword}%")
       end
       
-      query = query.limit(8).map{|tax| {value: tax.id, text: tax.name} }
+      query = query.order('erp_taxes_taxes.short_name ASC')
+      
+      query = query.limit(8).map{|tax| {value: tax.id, text: tax.short_name} }
     end
     
     def archive
