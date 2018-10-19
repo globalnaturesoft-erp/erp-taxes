@@ -9,25 +9,23 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <%= erp_component('button/create', {
-        text: t('.create'),
-        href: erp_taxes.new_backend_tax_path,
-        class: 'btn-noborder'
-    }) %>
+    <%=
+        erp_component('button/create', {
+            text: t('.create'),
+            href: erp_taxes.new_backend_tax_path,
+            class: 'btn-noborder'
+        }) if can? :creatable, @tax
+    %>
 <% end %>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <% if @tax.errors.any? %>
             <%= erp_form_control("form_error_message") %>
         <% end %>
         
         <!-- BEGIN SAMPLE FORM PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-body">
-                <%= render 'form', tax: @tax %>
-            </div>
-        </div>
+        <%= render 'form', tax: @tax %>
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>

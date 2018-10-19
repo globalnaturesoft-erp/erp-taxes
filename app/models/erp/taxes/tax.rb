@@ -10,6 +10,9 @@ module Erp::Taxes
     TAX_COMPUTATION_FIXED = 'fixed'
     TAX_COMPUTATION_PRICE = 'percentage_of_price'
     
+    STATUS_ACTIVE = 'active'
+    STATUS_DELETED = 'deleted'
+    
     # get tax scope
     def self.get_tax_scope_options()
       [
@@ -27,26 +30,21 @@ module Erp::Taxes
       ]
     end
     
+    def self.all_active
+      self.where(status: Erp::Taxes::Tax::STATUS_ACTIVE)
+    end
+    
     # Filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
       and_conds = []
-      
-      # show archived items condition - default: false
-			show_archived = false
 			
 			#filters
 			if params["filters"].present?
 				params["filters"].each do |ft|
 					or_conds = []
 					ft[1].each do |cond|
-						# in case filter is show archived
-						if cond[1]["name"] == 'show_archived'
-							# show archived items
-							show_archived = true
-						else
-							or_conds << "#{cond[1]["name"]} = '#{cond[1]["value"]}'"
-						end
+						or_conds << "#{cond[1]["name"]} = '#{cond[1]["value"]}'"
 					end
 					and_conds << '('+or_conds.join(' OR ')+')' if !or_conds.empty?
 				end
@@ -66,9 +64,6 @@ module Erp::Taxes
           and_conds << '('+or_conds.join(' OR ')+')'
         end
       end
-			
-			# showing archived items if show_archived is not true
-			query = query.where(archived: false) if show_archived == false
 			
       query = query.where(and_conds.join(' AND ')) if !and_conds.empty?
       
@@ -92,10 +87,10 @@ module Erp::Taxes
     
     # data for dataselect ajax
     def self.dataselect(params)
-      query = self.all
+      query = self.all_active
       
       if params[:scope].present?
-        query = self.where(scope: params[:scope])
+        query = query.where(scope: params[:scope])
       end
       
       if params[:keyword].present?
@@ -122,6 +117,24 @@ module Erp::Taxes
     
     def self.unarchive_all
 			update_all(archived: false)
+		end
+    
+    # set status for tax
+    def set_active
+      update_attributes(status: Erp::Taxes::Tax::STATUS_ACTIVE)
+    end
+    
+    def set_deleted
+      update_attributes(status: Erp::Taxes::Tax::STATUS_DELETED)
+    end
+    
+    # check tax status
+		def is_active?
+			return self.status == Erp::Taxes::Tax::STATUS_ACTIVE
+		end
+		
+		def is_deleted?
+			return self.status == Erp::Taxes::Tax::STATUS_DELETED
 		end
   end
 end

@@ -2,15 +2,22 @@ module Erp
   module Taxes
     module Backend
       class TaxesController < Erp::Backend::BackendController
-        before_action :set_tax, only: [:archive, :unarchive, :edit, :update, :destroy]
-        before_action :set_taxes, only: [:delete_all, :archive_all, :unarchive_all]
+        before_action :set_tax, only: [:archive, :unarchive, :edit, :update, :set_active, :set_deleted]
+        before_action :set_taxes, only: [:archive_all, :unarchive_all]
         
         # GET /taxes
         def index
+          if Erp::Core.available?("ortho_k")
+            authorize! :system_taxes_taxes_index, nil
+          end
         end
         
         # POST /taxes/list
         def list
+          if Erp::Core.available?("ortho_k")
+            authorize! :system_taxes_taxes_index, nil
+          end
+          
           @taxes = Tax.search(params).paginate(:page => params[:page], :per_page => 10)
           
           render layout: nil
@@ -19,6 +26,8 @@ module Erp
         # GET /taxes/new
         def new
           @tax = Tax.new
+          
+          authorize! :creatable, @tax
           
           # default scope
           if params[:scope].present?
@@ -32,15 +41,19 @@ module Erp
     
         # GET /taxes/1/edit
         def edit
-          
+          authorize! :updatable, @tax
         end
     
         # POST /taxes
         def create
           @tax = Tax.new(tax_params)
+          
+          authorize! :creatable, @tax
+          
           @tax.creator = current_user
           
           if @tax.save
+            @tax.set_active
             if request.xhr?
               render json: {
                 status: 'success',
@@ -61,6 +74,8 @@ module Erp
     
         # PATCH/PUT /taxes/1
         def update
+          authorize! :updatable, @tax
+          
           if @tax.update(tax_params)
             if request.xhr?
               render json: {
@@ -75,21 +90,6 @@ module Erp
             render :edit
           end
         end
-    
-        # DELETE /taxes/1
-        def destroy
-          @tax.destroy
-          
-          respond_to do |format|
-            format.html { redirect_to erp_taxes.backend_taxes_path, notice: t('.success') }
-            format.json {
-              render json: {
-                'message': t('.success'),
-                'type': 'success'
-              }
-            }
-          end
-        end
         
         # Archive /taxes/archive?id=1
         def archive      
@@ -102,7 +102,7 @@ module Erp
             'type': 'success'
             }
           }
-          end          
+          end
         end
         
         # Unarchive /taxes/unarchive?id=1
@@ -116,21 +116,7 @@ module Erp
             'type': 'success'
             }
           }
-          end          
-        end
-        
-        # DELETE /taxes/delete_all?ids=1,2,3
-        def delete_all         
-          @taxes.destroy_all
-          
-          respond_to do |format|
-            format.json {
-              render json: {
-                'message': t('.success'),
-                'type': 'success'
-              }
-            }
-          end          
+          end
         end
         
         # Archive /taxes/archive_all?ids=1,2,3
@@ -144,7 +130,7 @@ module Erp
                 'type': 'success'
               }
             }
-          end          
+          end
         end
         
         # Unarchive /taxes/unarchive_all?ids=1,2,3
@@ -158,7 +144,39 @@ module Erp
                 'type': 'success'
               }
             }
-          end          
+          end
+        end
+        
+        # Activate /taxes/set_active?id=1
+        def set_active
+          authorize! :activatable, @tax
+          
+          @tax.set_active
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
+        end
+
+        # Deleted /taxes/set_deleted?id=1
+        def set_deleted
+          authorize! :cancelable, @tax
+          
+          @tax.set_deleted
+
+          respond_to do |format|
+          format.json {
+            render json: {
+            'message': t('.success'),
+            'type': 'success'
+            }
+          }
+          end
         end
         
         def dataselect

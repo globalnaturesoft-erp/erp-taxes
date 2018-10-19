@@ -1,59 +1,79 @@
-<%= form_for([erp_taxes, :backend, tax]) do |f| %>    
-    <%= erp_form_control("text", {
-        name: 'tax[name]',
-        value: tax.name,                   
-        label: t('.name'),
-        help: t('.help_tax_name'),
-        required: true,
-        errors: tax.errors.full_messages_for(:name)
-    }) %>
-    <%= erp_form_control('select', {
-        label: t('.tax_scope'),
-        help: t('.help_tax_scope'),
-        name: 'tax[scope]',
-        value: tax.scope,
-        options: Erp::Taxes::Tax.get_tax_scope_options(),
-        required: true,
-        errors: tax.errors.full_messages_for(:scope)
-    }) %>
-    <%= erp_form_control('select', {
-        label: t('.computation'),
-        help: t('.help_computation'),
-        name: 'tax[computation]',
-        value: tax.computation,
-        options: Erp::Taxes::Tax.get_tax_computation_options(),
-        required: true,
-        errors: tax.errors.full_messages_for(:computation)
-    }) %>
-    <div class="hiddable-control"
-        data-cond-item="select[name='tax[computation]']"
-        data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_FIXED %>">
-        <%= erp_form_control("text", {
-            name: 'tax[amount]',
-            value: tax.amount,               
-            label: t('.amount'),
-            required: true,
-            errors: tax.errors.full_messages_for(:amount)
-        }) %>
+<%= form_for([erp_taxes, :backend, tax]) do |f| %>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <%= erp_form_control("text", {
+                        name: 'tax[name]',
+                        value: tax.name,                   
+                        label: t('.name'),
+                        help: t('.help_tax_name'),
+                        required: true,
+                        errors: tax.errors.full_messages_for(:name)
+                    }) %>
+                    <%= erp_form_control("text", {
+                        name: 'tax[short_name]',
+                        value: tax.short_name,                   
+                        label: t('.short_name')
+                    }) %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="hiddable-control"
+                                data-cond-item="select[name='tax[computation]']"
+                                data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_FIXED %>">
+                                <%= erp_form_control("text", {
+                                    name: 'tax[amount]',
+                                    value: tax.amount,               
+                                    label: t('.amount'),
+                                    required: true,
+                                    errors: tax.errors.full_messages_for(:amount)
+                                }) %>
+                            </div>
+                            <div class="hiddable-control"
+                                data-cond-item="select[name='tax[computation]']"
+                                data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_PRICE %>">
+                                <%= erp_form_control("text", {
+                                    name: 'tax[amount]',
+                                    id: 'touchspin_1',
+                                    value: tax.amount,               
+                                    label: t('.amount'),
+                                    required: true,
+                                    errors: tax.errors.full_messages_for(:amount)
+                                }) %>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <%= erp_form_control('select', {
+                                label: t('.computation'),
+                                help: t('.help_computation'),
+                                name: 'tax[computation]',
+                                value: tax.computation,
+                                options: Erp::Taxes::Tax.get_tax_computation_options(),
+                                required: true,
+                                errors: tax.errors.full_messages_for(:computation)
+                            }) %>
+                        </div>
+                    </div>
+                    <%= erp_form_control('select', {
+                        label: t('.tax_scope'),
+                        help: t('.help_tax_scope'),
+                        name: 'tax[scope]',
+                        value: tax.scope,
+                        options: Erp::Taxes::Tax.get_tax_scope_options(),
+                        required: true,
+                        errors: tax.errors.full_messages_for(:scope)
+                    }) %>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="hiddable-control"
-        data-cond-item="select[name='tax[computation]']"
-        data-cond-value="<%= Erp::Taxes::Tax::TAX_COMPUTATION_PRICE %>">
-        <%= erp_form_control("text", {
-            name: 'tax[amount]',
-            id: 'touchspin_1',
-            value: tax.amount,               
-            label: t('.amount'),
-            required: true,
-            errors: tax.errors.full_messages_for(:amount)
-        }) %>
-    </div>
-    <%= erp_form_control("text", {
-        name: 'tax[short_name]',
-        value: tax.short_name,                   
-        label: t('.short_name')
-    }) %>
-    <hr>
+    
     <%= erp_component('button/save', {
         text: t('submit')
     }) %>

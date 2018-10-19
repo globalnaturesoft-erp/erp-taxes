@@ -5,11 +5,12 @@ Erp::Taxes::Engine.routes.draw do
         collection do
           post 'list'
           get 'dataselect'
-          delete 'delete_all'
           put 'archive_all'
           put 'unarchive_all'
           put 'archive'
           put 'unarchive'
+          put 'set_active'
+          put 'set_deleted'
         end
       end
     end
